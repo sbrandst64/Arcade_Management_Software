@@ -9,34 +9,50 @@ ipaddress = 0
 port = 0
 
 NES = {"console": "NES",
-       "extensions": ".exe"}
+       "extensions": ".exe",
+       "filepath": "/home/pi/RetroPie/roms/nes"
+       }
 
 SNES = {"console": "SNES",
-        "extensions": ".smc"}  # .swc".fig", ".mgd", ".sfc",
+        "extensions": ".smc",
+        "filepath": "/home/pi/RetroPie/roms/snes"}  # .swc".fig", ".mgd", ".sfc",
 
 GAMEBOY = {"console": "GAMEBOY",
-           "extensions": ".gb\0"}
+           "extensions": ".gb\0",
+           "filepath": "/home/pi/RetroPie/roms/gb"
+           }
 
 DREAMCAST = {"console": "DREAMCAST",
-             "extensions": [".cdi", ".gdi"]}
+             "extensions": [".cdi", ".gdi"],
+             "filepath": ""}
 
 GBA = {"console": "GBA",
-       "extensions": ".gba"}
+       "extensions": ".gba",
+       "filepath": "/home/pi/RetroPie/roms/gba"
+       }
 
 GBC = {"console": "GBC",
-       "extensions": ".gbc"}
+       "extensions": ".gbc",
+       "filepath": "/home/pi/RetroPie/roms/gbc"
+       }
 
 N64 = {"console": "N64",
-       "extensions": [".n64", ".v64", ".z64"]}
+       "extensions": [".n64", ".v64", ".z64"],
+       "filepath": "/home/pi/RetroPie/roms/n64"
+       }
 
 MAME = {"console": "MAME",
-        "extensions": ".zip"}
+        "extensions": ".zip",
+        "filepath": "/home/pi/RetroPie/roms/fba"
+        }
 
 DS = {"console": "DS",
-      "extensions": ".nds"}
+      "extensions": ".nds",
+      "filepath": "/home/pi/RetroPie/roms/fds"
+      }
 
 options = [NES, SNES, GAMEBOY, DREAMCAST, GBA, GBC, N64, MAME, DS]
-downloadPath = r"C:\Users\a0509\Downloads"
+downloadPath = r"C:\Users\Brandstetter\Downloads"
 currentConsoleFilter = "."
 
 global downloadList
@@ -84,10 +100,6 @@ def Select_Emulator(emu):
 
 def Delete_Game_Clicked():
     oi = 0
-    ############################################################SSH-Stuff###################################
-
-
-################################################################## GUI - Related Stuff ######
 
 
 def GetDownloads(downloadList):
