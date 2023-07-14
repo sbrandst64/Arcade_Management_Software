@@ -3,14 +3,17 @@ import webbrowser
 from tkinter import *
 import customtkinter as ctk
 from PIL import Image
+from paramiko import transport
+
 from CTkListbox import *
 import paramiko
-paramiko.util.log_to_file("paramiko.log")
-# Open a transport
-host,port = "192.168.1.37",22
-transport = paramiko.Transport((host,port))
-username,password = "pi","raspberry"
-transport.connect(None,username,password)
+
+# paramiko.util.log_to_file("paramiko.log")
+# # Open a transport
+# host, port = "192.168.1.37", 22
+# transport = paramiko.Transport((host, port))
+# username, password = "pi", "raspberry"
+# transport.connect(None, username, password)
 
 NES = {"console": "NES",
        "extensions": ".exe",
@@ -56,23 +59,19 @@ DS = {"console": "DS",
       }
 
 options = [NES, SNES, GAMEBOY, DREAMCAST, GBA, GBC, N64, MAME, DS]
-downloadPath = r"C:\Users\Brandstetter\Downloads"
+downloadPath = r"C:\Users\sbran\Downloads"
 currentConsoleFilter = "."
 
-global downloadList
-global numberOfDownloads
-global currently_selected_emulator
-global selected_game
+
 def Transfer_Button_Clicked():
     # Go!
     emu_filepath = currently_selected_emulator["filepath"]
-    game_filepath = downloadPath+"\\"+selected_game
+    game_filepath = downloadPath + "\\" + selected_game
     sftp = paramiko.SFTPClient.from_transport(transport)
 
     sftp.put(game_filepath, emu_filepath)
     files = sftp.listdir()  # sollte die files im ordner auslesen können
-    print
-    files
+
     if sftp: sftp.close()
     if transport: transport.close()
     i = 0
@@ -84,9 +83,8 @@ def Online_Search_Button_Clicked():
 
 def Select_Download(game):
     global selected_game
-    selected_game= game
+    selected_game = game
     print(game)
-
 
 
 def Select_Emulator(emu):
@@ -161,7 +159,7 @@ def SetUpGui():
     deleteButton.place(relx=0.75, rely=0.05)
 
     dropmenue = CTkListbox(gui, width=90, height=50,
-    command=Select_Emulator)  # values=["NES", "SNES", "Gameboy", "DREAMCAST", "GBA", "GB", "GBC", "N64", "MAME", "DS"]
+                           command=Select_Emulator)  # values=["NES", "SNES", "Gameboy", "DREAMCAST", "GBA", "GB", "GBC", "N64", "MAME", "DS"]
     dropmenue.place(relx=0.55, rely=0.3)
     dropmenue.insert(0, "NES")
     dropmenue.insert(1, "SNES")
@@ -180,7 +178,7 @@ def SetUpGui():
     arcadeLabel = ctk.CTkLabel(gui, text="Arcade")
     arcadeLabel.place(relx=0.8, rely=0.22)
 
-
+    global downloadList
     downloadList = CTkListbox(gui, command=Select_Download)
     downloadList.place(relx=0.05, rely=0.3)
     GetDownloads(downloadList)
